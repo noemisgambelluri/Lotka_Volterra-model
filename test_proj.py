@@ -18,7 +18,7 @@ sol = odeint(LotkaVolterra, variables, t, args=(parameters,))
 #plot the populations
 plt.figure(figsize=(8, 5))
 plt.plot(t, sol[:,0], label="Prey (x)")
-plt.plot(t, sol[:,1], label="Predator (y)")
+plt.plot(t, sol[:,1], 'r--',label="Predator (y)")
 plt.xlabel("Time(days)")
 plt.ylabel("Population")
 plt.title("Lotka-Volterra Predator-Prey Simulation")
