@@ -11,15 +11,8 @@ def LotkaVolterra(variables, t, parameters):
 
 
 
-    #preys population level
-    x = variables[0]
-    #predators population level
-    y = variables[1]
-    
-    alpha = parameters[0]
-    beta = parameters [1]
-    delta = parameters[2]
-    gamma = parameters[3]
+    x, y = variables
+    alpha, beta, delta, gamma = parameters
     
     #Lotka-Volterra (also known as 'Predator-Prey) equations mathematical implementation:
     dxdt = alpha * x - beta * x * y
