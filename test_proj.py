@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint 
-from Functions.function_test import LotkaVolterra
+from Functions.LotkaVolterramodel_functions import LotkaVolterra
 
 #define initial conditions and parameters
 
@@ -25,3 +25,4 @@ plt.title("Lotka-Volterra Predator-Prey Simulation")
 plt.legend()
 
 plt.show()
+

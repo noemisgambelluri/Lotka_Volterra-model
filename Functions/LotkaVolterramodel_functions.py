@@ -20,3 +20,4 @@ def LotkaVolterra(variables, t, parameters):
     
     #return the rates of change of both the prey and predator populations
     return([dxdt, dydt])
+
