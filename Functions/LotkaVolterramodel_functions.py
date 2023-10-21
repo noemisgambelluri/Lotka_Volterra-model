@@ -84,7 +84,8 @@ def Equilibria(parameters):
      
 
     Parameters
-        parameters : parameters (alpha, beta, delta, gamma) that define the interaction between the species
+        parameters : float
+            parameters (alpha, beta, delta, gamma) that define the interaction between the species
 
     Returns:
         two types of population equilibrium points: Extinction equilibrium point (eq_point1) 
@@ -98,6 +99,45 @@ def Equilibria(parameters):
     eq_point2 = (gamma/delta, alpha/beta)
 
     return eq_point1, eq_point2
+
+def AmplitudeandFrequency(sol, t):
+
+    """
+
+    This function calculates the amplitude and frequency of the oscillations patterns of the Predator and
+    Prey's populations to understand the cyclic nature of the predator-prey interaction.
+
+    Parameters:
+        sol : array
+            contains the prey and predator populations over time.
+        
+        t : array
+            containing the time points
+    
+    """
+
+    predator_pop = sol[:, 1]
+    prey_pop = sol[:, 0]
+
+    #identify the peaks in the predators populations data 
+    predator_peaks, _ = find_peaks(predator_pop)
+    #compute time intervals betweem them
+    predator_t_intervals = np.diff(t[predator_peaks]) #subarray of time points corresponding to the peaks of the predator population
+    #compute frequency on the mean of all time points corresponding to the peak
+    predator_freq = 1 / np.mean(predator_t_intervals) 
+    #compute amplitude
+    predator_amplitude = np.max(predator_pop) - np.min(predator_pop)
+
+    #identify the peaks in the preys populations data
+    prey_peaks, _ = find_peaks(prey_pop)
+    #compute time intervals between them 
+    prey_t_intervals = np.diff(t[prey_peaks])
+    #compute frequency on the mean of all time points corresponding to the peak
+    prey_freq = 1 / np.mean(prey_t_intervals)
+    prey_amplitude = np.max(prey_pop) - np.min(prey_pop)
+
+    return prey_amplitude, prey_freq, predator_amplitude, predator_freq
+
 
 
 
