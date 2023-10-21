@@ -10,6 +10,7 @@
 import numpy as np
 from scipy.integrate import odeint
 from scipy.signal import find_peaks
+import matplotlib.pyplot as plt
 
 def LotkaVolterra(variables, parameters):
 
@@ -58,7 +59,7 @@ def SolveLotkaVolterra(parameters, initial_conditions, t_max, num_points):
         Number of time points for simulation.
 
     Returns:
-    solution : array
+    sol : array
         An array containing the prey and predator populations at different time points.
     
     t : array
@@ -139,23 +140,50 @@ def AmplitudeandFrequency(sol, t):
 
     return prey_amplitude, prey_freq, predator_amplitude, predator_freq
 
-def PhaseSpacePlot(parameters, initial_conditions, t_max, num_points):
+def PhaseSpacePlot(initial_conditions, sol, eq_point1, eq_point2):
 
     """
     Plot the phase space of Lotka-Volterra equations and mark the equilibrium points.
 
     Parameters:
-
-    parameters : float
-        Parameters (alpha, beta, delta, gamma) that define the interaction between the species.
-
     initial_conditions : float
         Initial populations of preys and predators.
 
-    t_max : float
-        Maximum time for the simulation.
-    
-    num_points : int
-        Number of time points for the simulation.
+    sol : array
+            contains the prey and predator populations over time.
+
+    eq_point1 : float
+        Extinction equilibrium points
+
+    eq_point2 : float 
+        Coexistence equilibrium point
+
     """
+
+    x0, y0 = initial_conditions
+    #create a figure for the plot
+    plt.figure(figsize=(8,5))
+
+    #plot the phase space trajectory of the Lotka-Volterra equations
+    plt.plot(sol[:, 0], sol[:, 1], label = 'Phase space plot of Lotka-Volterra eq', lw = 2)
+
+    #highlight the initial condition point in red
+    plt.scatter(initial_conditions, color = 'red', marker = 'o', label = 'Initial Condition', s = 100)
+
+    #highlight equilibrium points
+    plt.scatter(eq_point1, eq_point2, color = 'green', marker = 'x', label = 'Equilibrium Points', s= 100)
+
+    #set x-axis and y-axis labels and title
+    plt.xlabel('Preys population (x)')
+    plt.ylabel('Predators Population (y)')
+    plt.legend()
+    plt.title('Lotka-Volterra equations in Phase Space')
+    plt.show()
+
+
+    
+
+
+
+
     
