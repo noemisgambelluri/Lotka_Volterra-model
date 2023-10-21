@@ -75,6 +75,30 @@ def SolveLotkaVolterra(parameters, initial_conditions, t_max, num_points):
 
     return sol, t 
 
+def Equilibria(parameters):
+        
+    """
+
+    This function computes the two equilibrium points (steady-states solutions), i.e. the population 
+    values at which both the predator and prey populations remain constant over time. 
+     
+
+    Parameters
+        parameters : parameters (alpha, beta, delta, gamma) that define the interaction between the species
+
+    Returns:
+        two types of population equilibrium points: Extinction equilibrium point (eq_point1) 
+        and Coexistence equilibrium point (eq_point2).
+
+    """
+    alpha, beta, delta, gamma = parameters
+
+    #mathematical definition of the equilibrium points of the Lotka-Volterra equations
+    eq_point1 = (0.0, 0.0)
+    eq_point2 = (gamma/delta, alpha/beta)
+
+    return eq_point1, eq_point2
+
 
 
 
