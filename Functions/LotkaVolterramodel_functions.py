@@ -60,6 +60,7 @@ def SolveLotkaVolterra(parameters, initial_conditions, t_max, num_points):
     Returns:
     solution : array
         An array containing the prey and predator populations at different time points.
+    
     t : array
         An array containing the time points.
 
@@ -84,10 +85,10 @@ def Equilibria(parameters):
 
     Parameters
         parameters : float
-            parameters (alpha, beta, delta, gamma) that define the interaction between the species
+            Parameters (alpha, beta, delta, gamma) that define the interaction between the species
 
     Returns:
-        two types of population equilibrium points: Extinction equilibrium point (eq_point1) 
+        Two types of population equilibrium points: Extinction equilibrium point (eq_point1) 
         and Coexistence equilibrium point (eq_point2).
 
     """
@@ -107,6 +108,7 @@ def AmplitudeandFrequency(sol, t):
     Prey's populations to understand the cyclic nature of the predator-prey interaction.
 
     Parameters:
+
         sol : array
             contains the prey and predator populations over time.
         
@@ -136,3 +138,24 @@ def AmplitudeandFrequency(sol, t):
     prey_amplitude = np.max(prey_pop) - np.min(prey_pop)
 
     return prey_amplitude, prey_freq, predator_amplitude, predator_freq
+
+def PhaseSpacePlot(parameters, initial_conditions, t_max, num_points):
+
+    """
+    Plot the phase space of Lotka-Volterra equations and mark the equilibrium points.
+
+    Parameters:
+
+    parameters : float
+        Parameters (alpha, beta, delta, gamma) that define the interaction between the species.
+
+    initial_conditions : float
+        Initial populations of preys and predators.
+
+    t_max : float
+        Maximum time for the simulation.
+    
+    num_points : int
+        Number of time points for the simulation.
+    """
+    
