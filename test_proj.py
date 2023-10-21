@@ -3,26 +3,28 @@ import matplotlib.pyplot as plt
 from scipy.integrate import odeint 
 from Functions.LotkaVolterramodel_functions import LotkaVolterra
 
-#define initial conditions and parameters
+#define the Lotka-Volterra parameters
+alpha = 1
+beta = 1
+delta = 1
+gamma = 1
 
-variables = [9, 4]
+#create an array of time values
+time_values = np.linspace(0, 200, 1000) 
 
-parameters = [1, 1, 1, 1]
+#create an array of different initial conditions
+IC = np.linspace(1.0, 7.0, 10)
 
-#create a time vector
-t = np.linspace(0, 50, 1000) #time from 0 to 200 with 1000 time points
-
-#solve the differential equations 
-sol = odeint(LotkaVolterra, variables, t, args=(parameters,))
-
-#plot the populations
+#Create a fiure for the Lotka Volterra equations as a function of time
 plt.figure(figsize=(8, 5))
-plt.plot(t, sol[:,0], label="Prey (x)")
-plt.plot(t, sol[:,1], 'r--',label="Predator (y)")
-plt.xlabel("Time(days)")
-plt.ylabel("Population")
-plt.title("Lotka-Volterra Predator-Prey Simulation")
-plt.legend()
+for initial_conditions in IC:
+    sol = odeint(LotkaVolterra, IC, time_values, args = (alpha, beta, delta, gamma))
+    plt.plot(time_values, sol[:, 0], label = "Preys", lw = 1)
+    plt.plot(time_values, sol[:, 1], label = 'Predators', lw = 1, linestyle = '--')
 
+plt.xlabel("Time")
+plt.ylabel("Population")
+plt.title("Lotka-Volterra equations equations as a function of Time")
+plt.legend()
 plt.show()
 

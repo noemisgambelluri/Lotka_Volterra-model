@@ -1,35 +1,28 @@
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
-from scipy import integrate
 
+# Define the parameters
+alpha = 0.1
+beta = 0.02
+delta = 0.3
+gamma = 0.01
 
-alpha = 1. #mortality rate due to predators
-beta = 1.
-delta = 1.
-gamma = 1.
-x0 = 4.
-y0 = 2.
+# Create a grid of x and y values
+x = np.linspace(0.01, 5, 400)
+y = np.linspace(0.01, 5, 400)
+X, Y = np.meshgrid(x, y)
 
-def derivative(X, t, alpha, beta, delta, gamma):
-    x, y = X
-    dotx = x * (alpha - beta * y)
-    doty = y * (-delta + gamma * x)
-    return np.array([dotx, doty])
-                    
-Nt = 1000
-tmax = 30.
-t = np.linspace(0.,tmax, Nt)
-X0 = [x0, y0]
-res = integrate.odeint(derivative, X0, t, args = (alpha, beta, delta, gamma))
-x, y = res.T
-plt.figure()
-plt.grid()
-plt.title("odeint method")
-plt.plot(t, x, 'xb', label = 'Deer')
-plt.plot(t, y, '+r', label = "Wolves")
-plt.xlabel('Time t, [days]')
-plt.ylabel('Population')
-plt.legend()
+# Calculate the function V
+V = delta * X - gamma * np.log(X) + beta * Y - alpha * np.log(Y)
 
-plt.show()                   
+# Create a 3D surface plot of V
+fig = plt.figure(figsize=(10, 8))
+ax = fig.gca(projection='3d')
+ax.plot_surface(X, Y, V, cmap='viridis')
+
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('V')
+ax.set_title('Surface Plot of V')
+
+plt.show()
