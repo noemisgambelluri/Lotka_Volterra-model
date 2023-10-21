@@ -8,7 +8,6 @@
 #=======================================================================
 
 import numpy as np
-from scipy.integrate import find_peaks
 from scipy.integrate import odeint
 from scipy.signal import find_peaks
 
@@ -137,16 +136,3 @@ def AmplitudeandFrequency(sol, t):
     prey_amplitude = np.max(prey_pop) - np.min(prey_pop)
 
     return prey_amplitude, prey_freq, predator_amplitude, predator_freq
-
-
-
-
-
-
-
-    
-    
-
-
-
-
