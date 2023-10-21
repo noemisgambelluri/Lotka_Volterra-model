@@ -7,7 +7,6 @@
 # Aim: To define the functions needed to simulate the Lotka-Volterra model.
 #=======================================================================
 
-
 def LotkaVolterra(variables, parameters):
 
     """
@@ -31,5 +30,34 @@ def LotkaVolterra(variables, parameters):
     dydt = delta * x * y - gamma * y
 
     return dxdt, dydt
+
+def Equilibria(parameters):
+        
+    """
+    This function computes the two equilibrium points, i.e. the population values at which both
+    the predator and prey populations remain constant over time. 
+    
+
+    Parameters
+        parameters : parameters that define the interaction between the species
+
+    Returns:
+        equilibrium points values
+    """
+    alpha, beta, delta, gamma = parameters
+
+    #mathematical definition of the equilibrium points of the Lotka-Volterra equations
+    eq_point1 = (0.0, 0.0)
+    eq_point2 = (gamma/delta, alpha/beta)
+
+    return eq_point1, eq_point2
+
+
+
+
+    
+    
+
+
 
 
