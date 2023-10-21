@@ -168,7 +168,7 @@ def PhaseSpacePlot(initial_conditions, sol, eq_point1, eq_point2):
     plt.plot(sol[:, 0], sol[:, 1], label = 'Phase space plot of Lotka-Volterra eq', lw = 2)
 
     #highlight the initial condition point in red
-    plt.scatter(initial_conditions, color = 'red', marker = 'o', label = 'Initial Condition', s = 100)
+    plt.scatter(x0, y0, color = 'red', marker = 'o', label = 'Initial Condition', s = 100)
 
     #highlight equilibrium points
     plt.scatter(eq_point1, eq_point2, color = 'green', marker = 'x', label = 'Equilibrium Points', s= 100)
