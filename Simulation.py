@@ -36,9 +36,14 @@ initial_conditions = [x0, y0]
 # Numerically solve the Lotka-Volterra equations
 solution, time = LVM.SolveLotkaVolterra(parameters, initial_conditions, t_max, num_points)
 
-# Computes the two equilibrium points (steady-states solutions)
+# Compute the two equilibrium points (steady-states solutions)
 eq_points = LVM.Equilibria(parameters)
 print(eq_points)
+
+# Calculate the amplitude and frequency of the oscillations of Predators and Preys populations
+prey_ampl, prey_freq, pred_ampl, pred_freq = LVM.AmplitudeandFrequency(solution, time)
+print(pred_ampl, prey_ampl, pred_freq, prey_freq)
+
 
 # plot
 plt.plot(time, solution[:, 0])
