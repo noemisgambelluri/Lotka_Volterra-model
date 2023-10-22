@@ -160,7 +160,13 @@ def LotkaVolterraDynamicsPlot(sol, t_max, num_points):
     #create a time vector
     t = np.linspace(0, t_max, num_points)
     plt.figure(figsize=(8,5))
-    plt.plot()
+    plt.plot(t, sol[:, 0], label = 'Preys Population (x)', lw = 2)
+    plt.plot(t, sol[:, 1], label = 'Predators Population', lw = 2)
+
+    plt.xlabel('Time')
+    plt.ylabel('Population')
+    plt.legend()
+    plt.show()
 
 
 
