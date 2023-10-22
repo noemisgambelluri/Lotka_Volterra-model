@@ -36,6 +36,10 @@ initial_conditions = [x0, y0]
 # Numerically solve the Lotka-Volterra equations
 solution, time = LVM.SolveLotkaVolterra(parameters, initial_conditions, t_max, num_points)
 
+# Computes the two equilibrium points (steady-states solutions)
+eq_points = LVM.Equilibria(parameters)
+print(eq_points)
+
 # plot
 plt.plot(time, solution[:, 0])
 plt.plot(time, solution[:, 1])
