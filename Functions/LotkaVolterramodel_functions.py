@@ -163,6 +163,7 @@ def LotkaVolterraDynamicsPlot(sol, t_max, num_points):
     plt.plot(t, sol[:, 0], label = 'Preys Population (x)', lw = 2)
     plt.plot(t, sol[:, 1], label = 'Predators Population', lw = 2)
 
+    #add x-axis and y-axis label and legend
     plt.xlabel('Time')
     plt.ylabel('Population')
     plt.legend()
