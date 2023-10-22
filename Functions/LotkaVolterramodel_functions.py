@@ -111,10 +111,10 @@ def AmplitudeandFrequency(sol, t):
     Parameters:
 
         sol : array
-            contains the prey and predator populations over time.
+            Contains the prey and predator populations over time.
         
         t : array
-            containing the time points
+            Containing the time points
     
     """
 
@@ -139,6 +139,31 @@ def AmplitudeandFrequency(sol, t):
     prey_amplitude = np.max(prey_pop) - np.min(prey_pop)
 
     return prey_amplitude, prey_freq, predator_amplitude, predator_freq
+
+def LotkaVolterraDynamicsPlot(sol, t_max, num_points):
+
+    """
+    Plot Lotka-Volterra equations as a function of time.
+
+    Parameters:
+    sol : array
+        Contains the prey and predator populations over time.
+
+    t_max : float
+        Maximum time for simulation.
+
+    num_points : int
+        Number of time points for simulation.
+    
+    """
+
+    #create a time vector
+    t = np.linspace(0, t_max, num_points)
+    plt.figure(figsize=(8,5))
+    plt.plot()
+
+
+
 
 def PhaseSpacePlot(initial_conditions, sol, eq_point1, eq_point2):
 
@@ -181,7 +206,7 @@ def PhaseSpacePlot(initial_conditions, sol, eq_point1, eq_point2):
     plt.show()
 
 
-    
+
 
 
 
