@@ -63,9 +63,19 @@ np.save(eq_points_path, eq_points)
 
 # Save results to txt file 
 with open(resultsfile_path, 'w', encoding="utf-8") as resultsfile:
-    resultsfile.write('Rates of change of the preys population for each time point:\n')
+    resultsfile.write('Lotka-Volterra equations equilibrium points (i.e. steady-state solutions):\n')
+    resultsfile.write(str(eq_points))
+    resultsfile.write('\n\nAmplitude and frequency of Prey Population oscillation pattern:\n')
+    resultsfile.write(str(prey_ampl))
+    resultsfile.write('\n')
+    resultsfile.write(str(prey_freq))
+    resultsfile.write('\n\nAmplitude and frequency of Predator Population oscillation pattern:\n')
+    resultsfile.write(str(pred_ampl))
+    resultsfile.write('\n')
+    resultsfile.write(str(pred_freq))
+    resultsfile.write('\n\nRates of change of the prey population for each time point:\n')
     resultsfile.write(str(prey_rates))
-    resultsfile.write('\n\nRates of change of the predators population for each time point:\n')
+    resultsfile.write('\n\nRates of change of the predator population for each time point:\n')
     resultsfile.write(str(pred_rates))
 
 
