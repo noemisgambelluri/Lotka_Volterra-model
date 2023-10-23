@@ -1,4 +1,15 @@
-Rates of change of the preys population for each time point:
+Lotka-Volterra equations equilibrium points (i.e. steady-state solutions):
+((0.0, 0.0), (4.0, 2.75))
+
+Amplitude and frequency of Prey Population oscillation pattern:
+44.03773051358519
+0.055269709543568454
+
+Amplitude and frequency of Predator Population oscillation pattern:
+14.965110895242423
+0.055269709543568454
+
+Rates of change of the prey population for each time point:
 [5.00000000e+00 3.05911963e+00 1.88150440e+00 1.17150743e+00
  7.41316889e-01 4.77684099e-01 3.13708538e-01 2.10013883e-01
  1.43294891e-01 9.96109678e-02 7.05113534e-02 5.07973723e-02
@@ -250,7 +261,7 @@ Rates of change of the preys population for each time point:
  9.11509007e-03 9.98573196e-03 1.09476295e-02 1.20107110e-02
  1.31860099e-02 1.44858066e-02 1.59237548e-02 1.75150368e-02]
 
-Rates of change of the predators population for each time point:
+Rates of change of the predator population for each time point:
 [15.         14.99254167 14.75742156 14.39223246 13.95789184 13.49069885
  13.01181507 12.5334398  12.06253741 11.60301773 11.15699901 10.7255407
  10.30907167  9.90764326  9.52108056  9.14907403  8.79123569  8.4471339
