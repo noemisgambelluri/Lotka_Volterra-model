@@ -6,3 +6,9 @@ The aim of this project is to simulate the Lotka-Volterra model for *two species
 
 To clone the repository and initiate the simulation, the user should utilize the specified command line syntax, subsequently enabling the visualization of the animation:
 
+    gitclone https://github.com/noemisgambelluri/Lotka_Volterra-model.git
+    cd Lotka_Volterra-model
+    
+    python Simulation.py settings.ini
+    python Animation.py settings.ini
+
