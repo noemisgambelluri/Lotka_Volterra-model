@@ -11,6 +11,7 @@ import configparser
 import sys
 from Functions import LotkaVolterraModel as LVM
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 # Read configuration file
@@ -27,6 +28,13 @@ y0 = float(config['parameters']['y0'])
 t_max = float(config['parameters']['t_max'])
 num_points = int(config['parameters']['num_points'])
 
+# Import path parameters
+prey_rates_path = config['paths']['prey_rates_path']
+pred_rates_path = config['paths']['pred_rates_path']
+time_path = config['paths']['time_path']
+eq_points_path = config['paths']['eq_points_path']
+resultsfile_path = config['txt_file_path']['results_path']
+
 # Save single parameters to variable
 parameters = (alpha, beta, delta, gamma)
 
@@ -41,21 +49,28 @@ eq_points = LVM.Equilibria(parameters)
 # Calculate the amplitude and frequency of the oscillations of Predators and Preys populations
 prey_ampl, prey_freq, pred_ampl, pred_freq = LVM.AmplitudeandFrequency(solution, time)
 
-
-# plot
-plt.plot(time, solution[:, 0])
-plt.plot(time, solution[:, 1])
-plt.legend()
-plt.xlabel('time')
-
-plt.show()
-
 # Save Prey Population rates of change to variable
 prey_rates = solution[:, 0]
 
 # Save Predator Population rates of change to variable
 pred_rates = solution[:, 1]
 
+# Save prey population rates of change to file
+np.save(prey_rates_path, prey_rates)
+np.save(pred_rates_path, pred_rates)
+np.save(time_path, time)
+np.save(eq_points_path, eq_points)
+
+# Save results to txt file 
+with open(resultsfile_path, 'w', encoding="utf-8") as resultsfile:
+    resultsfile.write('Rates of change of the preys population for each time point:\n')
+    resultsfile.write(str(prey_rates))
+    resultsfile.write('\n\nRates of change of the predators population for each time point:\n')
+    resultsfile.write(str(pred_rates))
 
 
-
+# plot
+plt.plot(time, solution[:, 0])
+plt.plot(time, solution[:, 1])
+plt.xlabel('time')
+plt.show()
