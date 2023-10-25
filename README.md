@@ -31,3 +31,15 @@ All parameters are positive and real.
 The solution of the differential equations is deterministic and continuous. This, in turn, implies that the generations of both the predator and prey are continually overlapping.
 
 ### Model Assumptions
+
+The prey are assumed to have unlimtide food supply and to reproduce exponentially, unless subject to predation. This is mathematically expressed by the $\alpha x$ term in the equation above. The predation rate is assumed to be proportional to the encounter rate between the species, mathematically represented by the term $\beta x y$. The action of "predation" no longer exists as soon as one or both species is exinct (*x* = 0, *y* = 0). Furthermore, the prey's population rate of change is given by its own growth rate minus the rate at which it is preyed upon.
+
+The growth of the predator population is mathematically represented by the term $\delta x y$ (note that a different constant is used compared to the predation rate, as the rate at which the predator population grows is not necessarily equal to the rate at which it consumes the prey). The loss rate of the predators due to either natural death or emigration is mathematically described by the term $\gamma y$. This term exponentially decay i absence of prey. Furthermore, the equation expresses that the rate of change of the predator's population depends upon the rate at which it consumes prey, minus its intrinsic death rate.
+
+In this frame, the Lotka-Volterra model is based on the following assumptions regarding environment and biology of the two species populations:
+* The food supply of the predator population depends entirely on the size of the prey population;
+* The prey population finds ample food at all times;
+* The rate of change of population is proportional to its size;
+* During the process, the environment does not change in favour of one species, and genetic adaptation is inconsequential;
+* Predators have limitless appetite;
+* Both populations can be described by a single variable. This amounts to assuming that the populations do not have a spatial or age distribution that contributes to the dynamics.
