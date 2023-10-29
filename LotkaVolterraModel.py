@@ -98,8 +98,8 @@ def Equilibria(parameters):
     alpha, beta, delta, gamma = parameters
 
     # Mathematical definition of the equilibrium points of the Lotka-Volterra equations
-    eq_point1 = (0.0, 0.0)
-    eq_point2 = (gamma/delta, alpha/beta)
+    eq_point1 = [0.0, 0.0]
+    eq_point2 = [gamma/delta, alpha/beta]
 
     return eq_point1, eq_point2
 
