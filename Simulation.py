@@ -1,15 +1,15 @@
-#=======================================================================
+#########################################################################
 # Author: Noemi Sgambelluri
 # Date: 22 October, 2023
 #
 # Simulation
 #
 # Aim: To simulate the Lotka-Volterra Model.
-#=======================================================================
+#########################################################################
 
 import configparser
 import sys
-from Functions import LotkaVolterraModel as LVM
+import LotkaVolterraModel as LVM
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -79,8 +79,42 @@ with open(resultsfile_path, 'w', encoding="utf-8") as resultsfile:
     resultsfile.write(str(pred_rates))
 
 
-# plot
-plt.plot(time, solution[:, 0])
-plt.plot(time, solution[:, 1])
-plt.xlabel('time')
+# Create Populations dynamic plots
+plt.figure(figsize=(8,5))
+plt.plot(time, prey_rates, label = 'Preys Population (x)', lw = 2)
+plt.plot(time, pred_rates, label = 'Predators Population (y)', linestyle = '--', lw = 2)
+
+# Add x-axis,y-axis, label and legend
+plt.xlabel('Time')
+plt.ylabel('Population')
+plt.legend()
+plt.show()
+
+# Create Phase Space plot
+plt.figure(figsize=(8,5))
+
+# Create array of differnt values for predators initial condition
+y0_values  = np.linspace(1, 10, 10) 
+
+# Solve Lotka Volterra equations for all values in predators initial conditions array
+for y0 in y0_values:
+    initial_conditions = [x0, y0]
+    solution, time = LVM.SolveLotkaVolterra(parameters, initial_conditions, t_max, num_points)
+    prey_rates = solution[:, 0]
+    pred_rates = solution[:, 1]
+
+    # Plot predators population rates as a function of preys population rate: phase space plot
+    plt.plot(prey_rates, pred_rates, label = 'y0 = %d' % y0, lw = 2)
+
+# Highlight the initial condition point in red
+plt.scatter(x0, y0, color = 'red', marker = 'o', label = 'Initial Condition', s = 100)
+
+# Highlight equilibrium points
+plt.scatter(eq_points[0][0], eq_points[0][1], color = 'green', marker = 'x', label = 'Extinction eq. point', s= 100)
+plt.scatter(eq_points[1][0], eq_points[1][1], color = 'blue', marker = 'x', label = 'Coexistence eq. point', s= 100)
+
+# Add x-axis, y-axis, label and legend
+plt.xlabel('Preys Population (x)')
+plt.ylabel('Predators Population (y)')
+plt.legend()
 plt.show()
