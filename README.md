@@ -43,3 +43,4 @@ In this frame, the Lotka-Volterra model is based on the following assumptions re
 * During the process, the environment does not change in favour of one species, and genetic adaptation is inconsequential;
 * Predators have limitless appetite;
 * Both populations can be described by a single variable. This amounts to assuming that the populations do not have a spatial or age distribution that contributes to the dynamics.
+
