@@ -1,5 +1,5 @@
 Lotka-Volterra equations equilibrium points (i.e. steady-state solutions):
-((0.0, 0.0), (4.0, 2.75))
+([0.0, 0.0], [4.0, 2.75])
 
 Amplitude and frequency of Prey Population oscillation pattern:
 44.03773051358519
