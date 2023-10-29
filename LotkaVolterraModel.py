@@ -117,6 +117,8 @@ def AmplitudeandFrequency(sol, t):
         
         t : array
             Containing the time points
+    TODO
+    Returns:
     """
 
     predator_pop = sol[:, 1]
