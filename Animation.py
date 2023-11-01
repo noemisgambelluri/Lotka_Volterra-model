@@ -61,3 +61,9 @@ def animate(i):
 
 animation = FuncAnimation(fig, animate, frames=int(num_points/animation_speed), interval=1, repeat=False)
 
+# Add x-axis, y-axis, label and legend
+plt.xlabel('Time')
+plt.ylabel('Population)
+plt.legend()
+plt.show()
+
