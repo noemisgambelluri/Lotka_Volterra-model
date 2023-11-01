@@ -59,3 +59,5 @@ def animate(i):
 
     return line1, line2
 
+animation = FuncAnimation(fig, animate, frames=int(num_points/animation_speed), interval=1, repeat=False)
+
