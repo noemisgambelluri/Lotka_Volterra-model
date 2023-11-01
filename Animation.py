@@ -8,9 +8,9 @@
 #########################################################################
 
 import configparser
-import numpy as np
 import sys
 from sys import argv
+import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation, PillowWriter
 
@@ -47,12 +47,15 @@ fig.suptitle('Prey-Predator Populations change rates')
 
 # Plot preys and predators on different lines 
 line1, = ax.plot(time, pred_rates, label = 'Preys', lw = 2)
-line2, = ax.plot(time, prey_rates, label = 'Predators', lw = 2)
+line2, = ax.plot(time, prey_rates, label = 'Predators', linestyle = '--', lw = 2)
 
+# Create animation
+animation_speed = 4
+def animate(i):
 
+    i = 0 * animation_speed
+    line1.set_data(time[:i], pred_rates[:i])
+    line2.set_data(time[:i], prey_rates[:i])
 
+    return line1, line2
 
-
-# Create figure
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize = (10,5))
-fig.suptitle("vv$_0$ = {}".format())
