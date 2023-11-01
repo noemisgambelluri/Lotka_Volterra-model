@@ -67,3 +67,6 @@ plt.ylabel('Population)
 plt.legend()
 plt.show()
 
+# Save animation
+writer = PillowWriter (fps = num_points)
+animation.save('Pre_pred_animation.gif', writer = writer)
