@@ -43,7 +43,7 @@ fig, ax = plt.subplots(figsize=(8,5))
 fig.suptitle('Preys-Predators in Phase Space')
 
 # Plot predators population rates as a function of preys population rate: phase space plot
-line1, = ax.plot(prey_rates, prey_rates, lw = 1)
+line1, = ax.plot(prey_rates, pred_rates, lw = 1)
 
 # Highlight the initial condition point in red
 IC_point = ax.scatter(x0, y0, color = 'red', marker = 'o', s = 100)
