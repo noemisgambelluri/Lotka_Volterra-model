@@ -18,10 +18,9 @@ from matplotlib.animation import FuncAnimation, PillowWriter
 
 # Read configuration file
 config=configparser.ConfigParser()
-# config.read(sys.argv[1])
-config.read(".\\settings.ini")
+config.read(sys.argv[1])
 
-# Import model parameters     
+# Import model parameters    
 alpha = float(config['parameters']['alpha'])                
 beta = float(config['parameters']['beta'])
 delta = float(config['parameters']['delta'])
@@ -42,10 +41,10 @@ pred_rates = np.load(pred_rates_path)
 time = np.load(time_path)
 
 # Create Populations dynamic plot
-fig, ax = plt.subplot(figsize=(8,5))
+fig, ax = plt.subplots(figsize=(8,5))
 fig.suptitle('Prey-Predator Populations change rates')
 
-# Plot preys and predators on different lines 
+# Plot preys and predators on different lines
 line1, = ax.plot(time, pred_rates, label = 'Preys', lw = 2)
 line2, = ax.plot(time, prey_rates, label = 'Predators', linestyle = '--', lw = 2)
 
@@ -53,7 +52,7 @@ line2, = ax.plot(time, prey_rates, label = 'Predators', linestyle = '--', lw = 2
 animation_speed = 4
 def animate(i):
 
-    i = 0 * animation_speed
+    i = i * animation_speed
     line1.set_data(time[:i], pred_rates[:i])
     line2.set_data(time[:i], prey_rates[:i])
 
@@ -69,4 +68,4 @@ plt.show()
 
 # Save animation
 writer = PillowWriter (fps = num_points)
-animation.save('Pre_pred_animation.gif', writer = writer)
+animation.save('Prey_pred_animation.gif', writer = writer)
