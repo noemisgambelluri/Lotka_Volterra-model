@@ -89,6 +89,7 @@ plt.xlabel('Time')
 plt.ylabel('Population')
 plt.legend()
 plt.show()
+plt.savefig('Dynamicplots.png')
 
 # Create Phase Space plot
 plt.figure(figsize=(8,5))
@@ -118,3 +119,4 @@ plt.xlabel('Preys Population (x)')
 plt.ylabel('Predators Population (y)')
 plt.legend()
 plt.show()
+plt.savefig('phasespaceplot.png')
