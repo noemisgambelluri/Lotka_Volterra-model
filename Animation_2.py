@@ -38,3 +38,13 @@ prey_rates = np.load(prey_rates_path)
 pred_rates = np.load(pred_rates_path)
 time = np.load(time_path)
 
+# Create Populations dynamic plot
+fig, ax = plt.subplots(figsize=(8,5))
+fig.suptitle('Preys-Predators in Phase Space')
+
+# Plot predators population rates as a function of preys population rate: phase space plot
+line1, = ax.plot(prey_rates, prey_rates, lw = 1)
+
+# Highlight the initial condition point in red
+IC_point = ax.scatter(x0, y0, color = 'red', marker = 'o', s = 100)
+text = ax.text(20, 14.5, '')
