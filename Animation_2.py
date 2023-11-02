@@ -50,7 +50,7 @@ IC_point = ax.scatter(x0, y0, color = 'red', marker = 'o', s = 100)
 text = ax.text(20, 14.5, '')
 
 # Create animation
-animation_speed = 3
+animation_speed = 2
 def animate(i):
 
     i = i * animation_speed
