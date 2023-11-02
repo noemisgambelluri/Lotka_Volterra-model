@@ -88,8 +88,9 @@ plt.plot(time, pred_rates, label = 'Predators Population (y)', linestyle = '--',
 plt.xlabel('Time')
 plt.ylabel('Population')
 plt.legend()
+plt.savefig('Dynamicplot.png')
 plt.show()
-plt.savefig('Dynamicplots.png')
+
 
 # Create Phase Space plot
 plt.figure(figsize=(8,5))
@@ -118,5 +119,5 @@ plt.scatter(eq_points[1][0], eq_points[1][1], color = 'blue', marker = 'x', labe
 plt.xlabel('Preys Population (x)')
 plt.ylabel('Predators Population (y)')
 plt.legend()
+plt.savefig('Phasespaceplot.png')
 plt.show()
-plt.savefig('phasespaceplot.png')
