@@ -4,13 +4,15 @@ The Lotka-Volterra model, names after Alfred Lotka and Vito Volterra, is a set o
 
 The aim of this project is to simulate the Lotka-Volterra model for *two species*. The goal is to offers a quantitative understanding of the dynamics within a simplified predator-prey ecosystem and to convey these dynamics visually through animations. These animations will depict the fluctuations in both predator and prey populations over time and demonstrate their interdependence in phase space.
 
-To clone the repository and initiate the simulation, the user should utilize the specified command line syntax, subsequently enabling the visualization of the animation:
+To clone the repository and initiate the simulation, the user should utilize the specified command lines syntax, subsequently enabling the visualization of the interactive plot and of the animations of teh Lotka-Volterra model:
 
     gitclone https://github.com/noemisgambelluri/Lotka_Volterra-model.git
     cd Lotka_Volterra-model
 
     python Simulation.py settings.ini
-    python Animation.py settings.ini
+    python InteractivePlot.py setting.ini
+    python Animation_1.py settings.ini
+    python Animation_2.py settings.ini
 
 ## Introduction to the model
 
@@ -43,4 +45,10 @@ In this frame, the Lotka-Volterra model is based on the following assumptions re
 * During the process, the environment does not change in favour of one species, and genetic adaptation is inconsequential;
 * Predators have limitless appetite;
 * Both populations can be described by a single variable. This amounts to assuming that the populations do not have a spatial or age distribution that contributes to the dynamics.
+
+## Model simulation
+
+This project contains 7 files:
+
+1. [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/setting.ini)
 
