@@ -48,3 +48,13 @@ line1, = ax.plot(prey_rates, prey_rates, lw = 1)
 # Highlight the initial condition point in red
 IC_point = ax.scatter(x0, y0, color = 'red', marker = 'o', s = 100)
 text = ax.text(20, 14.5, '')
+
+# Create animation
+animation_speed = 3
+def animate(i):
+
+    i = i * animation_speed
+    IC_point.set_offsets((prey_rates[i], pred_rates[i]))
+    text.set_text('Time = %.2f - Initial Condition (%.2f, %2f)' %(time[i], prey_rates[i], pred_rates[i]))
+
+animation = FuncAnimation(fig, animate, frames=int(num_points/animation_speed), interval=1, repeat=False)
