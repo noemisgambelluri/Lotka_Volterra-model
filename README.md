@@ -46,7 +46,20 @@ In this frame, the Lotka-Volterra model is based on the following assumptions re
 * Predators have limitless appetite;
 * Both populations can be described by a single variable. This amounts to assuming that the populations do not have a spatial or age distribution that contributes to the dynamics.
 
-## Model simulation
+## Model Simulation
+
+The steps of this simulation are structured to be followed in order to allow the user to better understand the functioning of the Lotka-Volterra model. 
+
+1. The user has to set the model parameters in the [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/settings.ini) file. In particular, the user has to choose: the Lotka-Volterra model parameters, hence $\alpha$ (prey per capita growth rate), $\beta$ (the effect of the presence of predators on the prey growth rate), $\gamma$ (predators per capita death rate), $\delta$ (the effect of the presence of prey on the predator's growth rate), the initial populations of preys $x_{0}$ and predators $y_{0}$, the maximum time of observation t_max and the total number of time points for which the simulation is going to be ran num_points. It is suggested to keep parameters below 2.0, hower there are no specific constraints. 
+
+2. The user has to launch the [Simulation](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Simulation.py) file
+
+
+
+
+
+
+## Project structure
 
 This project contains 7 files:
 
