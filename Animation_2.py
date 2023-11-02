@@ -58,3 +58,13 @@ def animate(i):
     text.set_text('Time = %.2f - Initial Condition (%.2f, %2f)' %(time[i], prey_rates[i], pred_rates[i]))
 
 animation = FuncAnimation(fig, animate, frames=int(num_points/animation_speed), interval=1, repeat=False)
+
+# Add x-axis, y-axis, label and legend
+plt.xlabel('Preys Population')
+plt.ylabel('Predators Population')
+plt.legend()
+plt.show()
+
+# Save animation
+writer = PillowWriter (fps = num_points)
+animation.save('Prey_pred_phasespace_animation.gif', writer = writer)
