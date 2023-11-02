@@ -49,7 +49,7 @@ line1, = ax.plot(time, pred_rates, label = 'Preys', lw = 2)
 line2, = ax.plot(time, prey_rates, label = 'Predators', linestyle = '--', lw = 2)
 
 # Create animation
-animation_speed = 4
+animation_speed = 3
 def animate(i):
 
     i = i * animation_speed
