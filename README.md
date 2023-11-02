@@ -50,5 +50,4 @@ In this frame, the Lotka-Volterra model is based on the following assumptions re
 
 This project contains 7 files:
 
-1. [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/setting.ini)
-
+1. [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/settings.ini)
