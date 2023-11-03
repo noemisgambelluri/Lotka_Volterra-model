@@ -52,7 +52,7 @@ The steps of this simulation are structured to be followed in order to allow the
 
 1. The user has to set the model parameters in the [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/settings.ini) file. In particular, the user has to choose: the Lotka-Volterra model parameters, hence $\alpha$ (prey per capita growth rate), $\beta$ (the effect of the presence of predators on the prey growth rate), $\gamma$ (predators per capita death rate), $\delta$ (the effect of the presence of prey on the predator's growth rate), the initial populations of preys $x_{0}$ and predators $y_{0}$, the maximum time of observation t_max and the total number of time points for which the simulation is going to be ran num_points. It is suggested to keep parameters below 2.0, hower there are no specific constraints. 
 
-2. The user has to launch the [Simulation](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Simulation.py) file through which parameters from the [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/settings.ini) file are imported exploiting the ConfigParser library, simulate the Lotka-Volterra model equations with the chosen initial conditions and visualize them in two different plots. The first plot is a dynamic representation of Lotka-Volterra equations, showing the rates of change of each population as a function of time, as shown in figure below. ![1](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Dynamicplot.png) The second plot is a representation of the Predators Population as a function of the Prey Population, to highlight their intertwined interaction, as shown in figure below. ![2](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/phasespaceplot.png) At the end of the simulation, the Lotka-Volterra equilibrium points (i.e., the Coexistence equilibrium point and the Extinction equilibrium point), amplitude and frequency of each population's oscillation pattern and the rates of change of each population for each time point are saved in a txt file in order to be easily consultable. 
+2. The user has to launch the [Simulation](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Simulation.py) file through which parameters from the [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/settings.ini) file are imported exploiting the ConfigParser library, simulate the Lotka-Volterra model equations with the chosen initial conditions and visualize them in two different plots. The first plot is a dynamic representation of Lotka-Volterra equations, showing the rates of change of each population as a function of time. The second plot is a representation of the Predators Population as a function of the Prey Population, to highlight their intertwined interaction. At the end of the simulation, the Lotka-Volterra equilibrium points (i.e., the Coexistence equilibrium point and the Extinction equilibrium point), amplitude and frequency of each population's oscillation pattern and the rates of change of each population for each time point are saved in a txt file in order to be easily consultable. 
 
 3. The user has to launch the [InteractivePlot](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/InteractivePlot.py) file, which allow to interactively play with initial conditions (i.e., preys and predators initial populations) and parameters (i.e., preys and predators growth rate). In this way, the user can experiment and have a better understanding of model as well as helping perform sensitivity analysis. The user can assess how changes in parameters affect the stability and the behaviour of the system. The interactive plot can also be useful in terms of model validation by showing how well the model aligns with observed population data.
 
@@ -62,4 +62,31 @@ The steps of this simulation are structured to be followed in order to allow the
 
 This project contains 7 files:
 
-1. [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/settings.ini)
+1. [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/settings.ini) is a .ini file that contains the model parameter set by the user and the local paths used to save and load the data to be visualized.
+
+2. [LotkaVolterraModel](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/LotkaVolterraModel.py) is a .py file in which are defined all the functions needed for the model simulation.
+
+3. [LVTestFunctions](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/LVTestFunctions.py) is a .py file used to test functions defined in [LotkaVolterraModel](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/LotkaVolterraModel.py).
+
+4. [Simulation](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Simulation.py) is a .py file that imports the model parameters from [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/settings.ini) and uses the functions defined in [LotkaVolterraModel](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/LotkaVolterraModel.py) file to simulate the model and calculate amplitude and frequency of oscillation patterns of the Lotka-Volterra equations as well as the equilibrium points for a given set of settings. The [Simulation](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Simulation.py) also produces plots to qualitatively assess understanding of the model.
+
+5. [InteractivePlot](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/InteractivePlot.py) is a .py file that show an interactive plot to the user in which parameters can be changes according to the user's choice.
+
+6. [Animation_1](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Animation_1.py) and [Animation_2](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Animation_2.py) are .py files that create, using mathplotlib.animation.FuncAnimated, two figures formed by a real time visualization of the Lotka-Volterra equations as a function of time and a real time plot of the Lotka-Volterra equations in the phase space. The figures are saved as animation_1.gif and animation_2.gif in the project folder.
+
+## Simulation Example
+
+Below the plots resulting from the example-simulation (provided settings) are shown. The Dynamic plot is shown in figure ![1](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Dynamicplot.png) The Lotka-Volterra equations show oscillation patterns revelaing how the populations change over time, It provides insights into the cyclical nature of their interactions, where the predator and prey populations rise and fall i response to each other. The Phase-space plot is shown in figure below ![2](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/phasespaceplot.png) it shows the phase portrait of the Lotka-Volterra equations and the critical points of the system.
+
+## Animations
+
+Below the animations figure of the dynamic plot and phase space plot are shown.
+
+Command line syntax:
+
+    python Simulation.py settings.ini
+    python Animation_1.py settings.ini
+    python Animation_2.py settings.ini
+
+![Animation_1](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Prey_pred_animation.gif) 
+![Animation_1](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Prey_pred_phasespace_animation.gif) 
