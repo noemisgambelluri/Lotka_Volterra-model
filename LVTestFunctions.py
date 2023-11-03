@@ -79,10 +79,8 @@ def test_Equilibria_length(alpha, beta, delta, gamma):
     """
     Procedure:
     1. Initialize random seed
-    2. Configurate time interval for Lotka Volterra model given a maximum time  
-    (t_max) and number of time points (num_points)
-    3. Initialize preys and predators initial conditions and paramaters values
-    4. Solve Lotka Volterra equations for each time point
+    2. Configurate the values for Lotka-volterra model parameters
+    3. Compute equilibrium points
 
     ---------
     Verification:
@@ -106,12 +104,12 @@ def test_Equilibria_computation():
 
     """
     Procedure:
-    1. 
-    2. 
+    1. Initialize parameters values
+    2. Manually compute equilibrium points values 
     ---------
     Verification:
-    3. 
-    4. 
+    3. The extinction equilibrium point's coordinates values has to the computed values
+    4. The coexistence equilibrium point's coordinates values has to the computed values
     """
 
     alpha = 1.0
