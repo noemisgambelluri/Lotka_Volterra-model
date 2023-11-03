@@ -117,8 +117,20 @@ def AmplitudeandFrequency(sol, t):
         
         t : array
             Containing the time points
-    TODO
     Returns:
+
+        prey_amplitude : float
+            prey population's oscillation pattern amplitude
+        
+        prey_freq : float
+            prey population's oscillation pattern frequency
+
+        predator_amplitude : float
+            predator population's oscillation pattern amplitude
+
+        predator_freq : float
+            predator population's oscillation pattern frequency
+
     """
 
     predator_pop = sol[:, 1]
