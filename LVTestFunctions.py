@@ -86,12 +86,10 @@ def test_Equilibria_length(alpha, beta, delta, gamma):
 
     ---------
     Verification:
-    3. The lenght of the solution array has to be the equal to the number of time points
-    4. The solution has to be a 2D array 
-    5. The lenght of the time array returned by the function has to be equal to the number 
-       of time points
-    6. All time points in the time array returned by the function has to be between 0 and 
-       the max set time value
+    5. The lenght of the equilibrium points array has to be the equal to two
+    6. The extinction equilibrium points has to have two coordinates
+    7. The coexistence equilibrium points has to have two coordinates
+    
     """
 
     np.random.seed(5)
@@ -108,12 +106,12 @@ def test_Equilibria_computation():
 
     """
     Procedure:
-    1. Initialize random seed
-    2. Generate initial configuration given a certain number of particles (num_part) and linear dimension of space (space_dim)
+    1. 
+    2. 
     ---------
     Verification:
-    3. The lenght of the output is 3
-    4. The lenght of the output components (coordinates x, y and orietations of the particles) is num_part
+    3. 
+    4. 
     """
 
     alpha = 1.0
