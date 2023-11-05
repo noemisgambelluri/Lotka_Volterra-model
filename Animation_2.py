@@ -4,7 +4,7 @@
 #
 # Lotka-Volterra animation plot
 #
-# Aim: To visualize animations of the Lotka-Volterra Model.
+# Aim: To visualize animations of the Lotka-Volterra Model in phase space.
 #########################################################################
 
 import configparser
@@ -33,7 +33,7 @@ prey_rates_path = config['paths']['prey_rates_path']
 pred_rates_path = config['paths']['pred_rates_path']
 time_path = config['paths']['time_path']
 
-# Import data and parameters
+# Import data and parameters in numpy
 prey_rates = np.load(prey_rates_path)
 pred_rates = np.load(pred_rates_path)
 time = np.load(time_path)
