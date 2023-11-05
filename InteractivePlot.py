@@ -70,7 +70,6 @@ fig.subplots_adjust(left=0.25, bottom=0.3)
 [prey_line] = ax.plot(time, prey_rates, linewidth=1, color='red')
 [pred_line] = ax.plot(time, pred_rates, linewidth=1, color='blue')
 ax.set_xlim([0, time[-1]])
-# ax.set_ylim([0, 50])
 
 # Add 4 sliders for tweaking the parameters
 # Define an axes area and draw a slider in it
