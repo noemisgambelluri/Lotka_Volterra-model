@@ -19,7 +19,7 @@ To clone the repository and initiate the simulation, the user should utilize the
 The lotka-volterra equations are a pair of first-order nonlinear differential equations used to  describe predator-prey interaction, in particular how one population is affected by the other and vicevrsa. the population change through time according to the pair of equations:
 
 $$\frac{dx}{dt} = \alpha x - \beta xy$$
-$$\frac{dy}{dt} = \delta x y - \gamma y$$
+$$\frac{dy}{dt} = \delta xy - \gamma y$$
 
 where 
 * the variable *x* is the population density of **prey** (for example, the number of fishes per square kilometre);
