@@ -121,12 +121,3 @@ def test_Equilibria_computation():
 
     assert eq_points[0] == (0.0, 0.0)
     assert eq_points[1] == (2.5, 2.0) 
-
-
-
-
-
-test_LotkaVolterra_computation()
-test_SolveLotkaVolterra_length()    
-test_Equilibria_length()
-test_Equilibria_computation()
