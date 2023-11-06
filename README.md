@@ -84,7 +84,7 @@ This project contains 7 files:
 
 ## Simulation Example
 
-Below the plots resulting from the example-simulation (provided settings) are shown. The Dynamic plot is shown in figure ![1](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Dynamicplot.png) The Lotka-Volterra equations show oscillation patterns revelaing how the populations change over time, It provides insights into the cyclical nature of their interactions, where the predator and prey populations rise and fall i response to each other. The Phase-space plot is shown in figure below ![2](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/phasespaceplot.png) it shows the phase portrait of the Lotka-Volterra equations and the critical points of the system.
+Below the plots resulting from the example-simulation (provided settings) are shown. The Dynamic plot is shown in figure ![1](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/images/Dynamicplot.png) The Lotka-Volterra equations show oscillation patterns revelaing how the populations change over time, It provides insights into the cyclical nature of their interactions, where the predator and prey populations rise and fall i response to each other. The Phase-space plot is shown in figure below ![2](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/images/phasespaceplot.png) it shows the phase portrait of the Lotka-Volterra equations and the critical points of the system.
 
 ## Animations
 
@@ -96,5 +96,5 @@ Command line syntax:
     python Animation_1.py settings.ini
     python Animation_2.py settings.ini
 
-![Animation_1](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Prey_pred_animation.gif) 
-![Animation_1](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Prey_pred_phasespace_animation.gif) 
+![Animation_1](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/images/Prey_pred_animation.gif) 
+![Animation_1](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/images/Prey_pred_phasespace_animation.gif) 
