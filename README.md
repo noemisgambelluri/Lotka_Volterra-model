@@ -50,7 +50,15 @@ In this frame, the Lotka-Volterra model is based on the following assumptions re
 
 The steps of this simulation are structured to be followed in order to allow the user to better understand the functioning of the Lotka-Volterra model. 
 
-1. The user has to set the model parameters in the [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/settings.ini) file. In particular, the user has to choose: the Lotka-Volterra model parameters, hence $\alpha$ (prey per capita growth rate), $\beta$ (the effect of the presence of predators on the prey growth rate), $\gamma$ (predators per capita death rate), $\delta$ (the effect of the presence of prey on the predator's growth rate), the initial populations of preys $x_{0}$ and predators $y_{0}$, the maximum time of observation t_max and the total number of time points for which the simulation is going to be ran num_points. It is suggested to keep parameters below 2.0, hower there are no specific constraints. 
+1. The user has to set the model parameters in the [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/settings.ini) file. In particular, the user has to choose the Lotka-Volterra parameters, hence: 
+    * $\alpha$ : prey per capita growth rate
+    * $\beta$ : the effect of the presence of predators on the prey growth rate
+    * $\gamma$ : predators per capita death rate
+    * $\delta$ : the effect of the presence of prey on the predator's growth rate
+    * $x_{0}$ : the initial population of preys
+    * $y_{0}$ : the initial population of predators
+
+It is suggested to keep parameters below 2.0, hower there are no specific constraints. 
 
 2. The user has to launch the [Simulation](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Simulation.py) file through which parameters from the [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/settings.ini) file are imported exploiting the ConfigParser library, simulate the Lotka-Volterra model equations with the chosen initial conditions and visualize them in two different plots. The first plot is a dynamic representation of Lotka-Volterra equations, showing the rates of change of each population as a function of time. The second plot is a representation of the Predators Population as a function of the Prey Population, to highlight their intertwined interaction. At the end of the simulation, the Lotka-Volterra equilibrium points (i.e., the Coexistence equilibrium point and the Extinction equilibrium point), amplitude and frequency of each population's oscillation pattern and the rates of change of each population for each time point are saved in a txt file in order to be easily consultable. 
 
