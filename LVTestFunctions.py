@@ -15,32 +15,43 @@ import LotkaVolterraModel as LVM
 
 def test_LotkaVolterra_computation():
 
-    """
-    Procedure:
-    1. Initialize a random combination of parameters values
-    2. Initialize variables (preys, predators) values
-    3. Initialize time value
-    3. Compute dxdt and dydt values to perform a validation test
+   """
+   Procedure:
+   1. Initialize a random combination of parameters values
+   2. Initialize variables (preys, predators) values
+   3. Initialize time value
+   4. Compute dxdt and dydt values to perform a validation test
     ---------
-    Verification:
-    3. The computation of dxdt performed by the function has to correspond to the expected
+   Verification:
+   5. The computation of dxdt performed by the function has to correspond to the expected
        computed dxdt value
-    4. The computation of dydt performed by the function has to correspond to the expected
+   6. The computation of dydt performed by the function has to correspond to the expected
        computed dydt value
+   7. Check the computation with negative parameters raises error 
     """
 
-    alpha = 1.2 
-    beta = 0.5
-    delta = 0.3
-    gamma = 0.5
-    variables = [15, 20]
-    time  = 25
-    dxdt, dydt = LVM.LotkaVolterra(variables, time, alpha, beta, delta, gamma)
+   alpha = 1.2
+   beta = 0.5
+   delta = 0.3
+   gamma = 0.5
+   variables = [15, 20]
+   time  = 25
+   dxdt, dydt = LVM.LotkaVolterra(variables, time, alpha, beta, delta, gamma)
     
-    assert dxdt == -132.0
-    assert dydt == 80.0
+   assert dxdt == -132.0
+   assert dydt == 80.0
+
+   # Check Lotka-Volterra model with negative parameters
+   negative_alpha = -1.2
+   try:
+      dxdt, dydt = LVM.LotkaVolterra(variables, time, negative_alpha, beta, delta, gamma)
+      # If there's no error, raise an AssertionError to indicate the test failure
+      raise AssertionError("Expected an error with negative parameters, but no error was raised.")
+
+   except Exception as e:
+        # Check that the exception message contains a specific error message related to negative parameters
+        assert "Negative parameters are not allowed" in str(e)
     
-#possiamo testare che la funzione dia un errore per parametri negativi
 
 @given(t_max = st.floats(1,50), num_points=st.integers(10,500))
 def test_SolveLotkaVolterra_extinction(t_max, num_points):
@@ -79,9 +90,6 @@ def test_SolveLotkaVolterra_extinction(t_max, num_points):
    assert final_prey_population == 0.0
    assert final_pred_population == 0.0
 
-   
-   #possiamo testare che se i predatori = 0, i prey crescono esponenzialmente
-   #possiamo testare che se i prey = 0, i predator decrescono esponenzialmente
 
 @given(alpha = st.floats(0, 2.0), beta = st.floats(0.1, 2.0), delta = st.floats(0.1, 2.0), gamma = st.floats(0, 2.0), t_max = st.floats(1,50), num_points=st.integers(10,500))
 def test_SolveLVBothScenarios(alpha, beta, delta, gamma, t_max, num_points):
@@ -91,17 +99,17 @@ def test_SolveLVBothScenarios(alpha, beta, delta, gamma, t_max, num_points):
    1. Configurate time interval for Lotka Volterra model given a maximum time  
    (t_max) and number of time points (num_points)
    2. Configurate the model parameters values
-   2. Initialize preys and predators initial conditions scenarios 
+   3. Initialize preys and predators initial conditions scenarios 
    that should lead to exponential decrease of predators and 
    exponential growth of preys
-   3. For loop changing the scenarios and solve Lotka Volterra equations 
+   4. For loop changing the scenarios and solve Lotka Volterra equations 
    for each time point of each scenario
    ---------
    Verification:
-   4. Check if the preys population remains zero 
-   5. Check if the predators populations exhibits exponential decrease
-   6. Check if the predators population remains zero
-   7. Check if the preys population exhibits exponential growth
+   5. Check if the preys population remains zero 
+   6. Check if the predators populations exhibits exponential decrease
+   7. Check if the predators population remains zero
+   8. Check if the preys population exhibits exponential growth
    """
 
    parameters = (alpha, beta, delta, gamma)
@@ -214,4 +222,4 @@ def test_Equilibria_computation():
     eq_points = LVM.Equilibria(parameters)
 
     assert eq_points[0] == (0.0, 0.0)
-    assert eq_points[1] == (2.5, 2.0) 
+    assert eq_points[1] == (2.5, 2.0)
