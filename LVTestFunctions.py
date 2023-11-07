@@ -40,6 +40,7 @@ def test_LotkaVolterra_computation():
     assert dxdt == -132.0
     assert dydt == 80.0
     
+#possiamo testare che la funzione dia un errore per parametri negativi
 
 @given(t_max = st.floats(1,50), num_points=st.integers(10,500))
 def test_SolveLotkaVolterra_extinction(t_max, num_points):
@@ -68,18 +69,17 @@ def test_SolveLotkaVolterra_extinction(t_max, num_points):
    solution, time = LVM.SolveLotkaVolterra(parameters, initial_conditions, t_max, num_points)
    
    # Check initial conditions match first points in solution
-   np.testing.assert_almost_equal(solution[0, 0], initial_conditions[0], decimal = 6)
-   np.testing.assert_almost_equal(solution[0, 1], initial_conditions[1], decimal = 6)
+   assert solution[0, 0] == initial_conditions[0]
+   assert solution[0, 1] == initial_conditions[1]
 
    final_prey_population = solution[-1, 0]
    final_pred_population = solution[-1, 1]
 
-   # Raise an Assertion Error if the prey and predator population is not equal to 0 (extinction)
-   np.testing.assert_almost_equal(final_prey_population, 0.0, decimal=6)
-   np.testing.assert_almost_equal(final_pred_population, 0.0, decimal = 6)
+   # Check if the prey and predator population are not equal to 0 (extinction)
+   assert final_prey_population == 0.0
+   assert final_pred_population == 0.0
 
-   #possiamo testare che le condizioni iniziali matchino i primi punti della soluzione
-   #possiamo testare che la funzione dia un errore per parametri negativi
+   
    #possiamo testare che se i predatori = 0, i prey crescono esponenzialmente
    #possiamo testare che se i prey = 0, i predator decrescono esponenzialmente
 
