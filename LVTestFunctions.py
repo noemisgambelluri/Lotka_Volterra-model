@@ -17,10 +17,10 @@ def test_LotkaVolterra_computation():
 
     """
     Procedure:
-    1. Initialize parameters values
+    1. Initialize a random combination of parameters values
     2. Initialize variables (preys, predators) values
     3. Initialize time value
-    3. Compute dxdt and dydt values
+    3. Compute dxdt and dydt values to perform a validation test
     ---------
     Verification:
     3. The computation of dxdt performed by the function has to correspond to the expected
@@ -29,7 +29,7 @@ def test_LotkaVolterra_computation():
        computed dydt value
     """
 
-    alpha = 1.2
+    alpha = 1.2 
     beta = 0.5
     delta = 0.3
     gamma = 0.5
@@ -39,6 +39,47 @@ def test_LotkaVolterra_computation():
     
     assert dxdt == -132.0
     assert dydt == 80.0
+    
+
+@given(t_max = st.floats(1,50), num_points=st.integers(10,500))
+def test_SolveLotkaVolterra_extinction(t_max, num_points):
+    
+   """
+   Procedure:
+   1. Configurate time interval for Lotka Volterra model given a maximum time  
+   (t_max) and number of time points (num_points)
+   2. Initialize preys and predators initial conditions as well as paramaters values
+   that lead to extinction of preys and predators
+   3. Solve Lotka Volterra equations for each time point
+   ---------
+   Verification:
+   4. Ensure that the final prey and predators' populations reach zero or close to zero
+   5. If this does not appen, raise an assertion error
+   """
+
+   alpha = 1.0
+   beta = 1.0
+   delta = 2.0
+   gamma = 2.0
+   initial_conditions = (1.0, 1.0)
+   parameters = (alpha, beta, delta, gamma)
+   
+   solution, time = LVM.SolveLotkaVolterra(parameters, initial_conditions, t_max, num_points)
+   
+   final_prey_population = solution[-1, 0]
+   final_pred_population = solution[-1, 1]
+
+   # Raise an Assertion Error if the prey and predator population is not equal to 0 (extinction)
+   np.testing.assert_almost_equal(final_prey_population, 0.0, decimal=6)
+   np.testing.assert_almost_equal(final_pred_population, 0.0, decimal = 6)
+
+
+   #possiamo testare che usando certi parametri si raggiung al'estinzione
+   #possiamo testare che le condizioni iniziali matchino i primi punti della soluzione
+   #possiamo testare che la funzione dia un errore per parametri negativi
+   #possiamo testare che se i predatori = 0, i prey crescono esponenzialmente
+   #possiamo testare che se i prey = 0, i predator decrescono esponenzialmente
+
 
 @given(t_max = st.floats(1,50), num_points=st.integers(10,500))
 def test_SolveLotkaVolterra_length(t_max, num_points):
@@ -98,7 +139,8 @@ def test_Equilibria_length(alpha, beta, delta, gamma):
     assert len(eq_points) == 2
     assert len(eq_points[0]) == 2
     assert len(eq_points[1]) == 2
-
+   #possiamo testare che la forma matematica dei punti di equilibrio sia quella calcolando lo jacobiano: se i punti sono calcolati
+   #correttamente allora la forma dello jacobiano deve essere quella
 
 def test_Equilibria_computation():
 
