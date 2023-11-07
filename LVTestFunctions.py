@@ -90,14 +90,18 @@ def test_SolveLVBothScenarios(alpha, beta, delta, gamma, t_max, num_points):
    Procedure:
    1. Configurate time interval for Lotka Volterra model given a maximum time  
    (t_max) and number of time points (num_points)
-   2. Initialize preys and predators initial conditions as well as paramaters values
-   that should lead to extinction of preys and predators
-   3. Solve Lotka Volterra equations for each time point
+   2. Configurate the model parameters values
+   2. Initialize preys and predators initial conditions scenarios 
+   that should lead to exponential decrease of predators and 
+   exponential growth of preys
+   3. For loop changing the scenarios and solve Lotka Volterra equations 
+   for each time point of each scenario
    ---------
    Verification:
-   4. Ensure the initial conditions match the first points in the solution
-   5. Ensure that the final prey and predators' populations reach zero or close 
-   to zero (extinction)
+   4. Check if the preys population remains zero 
+   5. Check if the predators populations exhibits exponential decrease
+   6. Check if the predators population remains zero
+   7. Check if the preys population exhibits exponential growth
    """
 
    parameters = (alpha, beta, delta, gamma)
