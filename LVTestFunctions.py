@@ -8,6 +8,7 @@
 ########################################################################
 
 import numpy as np 
+from scipy.linalg import eigvals
 import hypothesis
 from hypothesis import strategies as st
 from hypothesis import given, settings
@@ -86,7 +87,7 @@ def test_SolveLotkaVolterra_extinction(t_max, num_points):
    final_prey_population = solution[-1, 0]
    final_pred_population = solution[-1, 1]
 
-   # Check if the prey and predator population are not equal to 0 (extinction)
+   # Check if the prey and predator population are equal to 0 (extinction)
    assert final_prey_population == 0.0
    assert final_pred_population == 0.0
 
@@ -199,27 +200,64 @@ def test_Equilibria_length(alpha, beta, delta, gamma):
     assert len(eq_points) == 2
     assert len(eq_points[0]) == 2
     assert len(eq_points[1]) == 2
-   #possiamo testare che la forma matematica dei punti di equilibrio sia quella calcolando lo jacobiano: se i punti sono calcolati
-   #correttamente allora la forma dello jacobiano deve essere quella
 
-def test_Equilibria_computation():
 
+def LotkaVolterraJacobian(x, *parameters):
+    
     """
-    Procedure:
-    1. Initialize parameters values
-    2. Manually compute equilibrium points values 
-    ---------
-    Verification:
-    3. The extinction equilibrium point's coordinates values has to the computed values
-    4. The coexistence equilibrium point's coordinates values has to the computed values
+    Jacobian matrix for the Lotka-Volterra equations.
     """
 
-    alpha = 1.0
-    beta = 0.5
-    delta = 0.2
-    gamma = 0.5
-    parameters = (alpha, beta, delta, gamma)
-    eq_points = LVM.Equilibria(parameters)
+    alpha, beta, delta, gamma = parameters
 
-    assert eq_points[0] == (0.0, 0.0)
-    assert eq_points[1] == (2.5, 2.0)
+    J = np.array([
+        [alpha - beta * x[1], -beta * x[0]],
+        [delta * x[1], delta * x[0] - gamma]
+    ])
+
+    return J
+
+def test_Equilibria():
+   
+   """
+   Procedure:
+   1. Define a function that check stability of an equilibirum point using known jacobian eigenvalues
+   2. Give all zero parameters
+   3. Give non-zero parameters
+
+   ---------
+   Verification:
+   5. Equilibirum points are zero and infinite with all zero parameters, check point is stable otherwise raise error
+   6. Equilibrium points have expected computed values with non-zero parameters, 
+   chech points are stable otherwise raise error
+   """
+
+   def check_stability(eq_point, parameters):
+      """
+      Check the stability of an equilibrium point using Jacobian eigenvalues.
+      """
+      J = LotkaVolterraJacobian(eq_point, *parameters)
+      eigenvalues = eigvals(J)
+      # If all eigenvalues have negative real parts, the equilibrium point is stable
+      assert all(np.real(eigenvalues) < 0), f"Unstable equilibrium point: {eq_point}"
+
+   # Test case 1: Equilibrium points with zero parameters
+   parameters_zero = [0.0, 0.0, 0.0, 0.0]
+   eq_point1, eq_point2 = LVM.Equilibria(parameters_zero)
+   assert eq_point1 == [0.0, 0.0]
+   assert eq_point2 == [float('inf'), float('inf')]  # Expecting infinity for division by zero
+
+   # Check stability of equilibrium points
+   check_stability(eq_point1, parameters_zero)
+   # Note: Stability of eq_point2 is not checked here due to division by zero
+
+   # Test case 2: Equilibrium points with non-zero parameters
+   parameters_nonzero = [2.0, 1.0, 2.5, 4.0]
+   eq_point1, eq_point2 = LVM.Equilibria(parameters_nonzero)
+   assert eq_point1 == [0.0, 0.0]
+   assert eq_point2 == [1.6, 0.5]
+
+   # Check stability of equilibrium points
+   check_stability(eq_point1, parameters_nonzero)
+   check_stability(eq_point2, parameters_nonzero)
+
