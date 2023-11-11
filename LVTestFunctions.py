@@ -9,6 +9,7 @@
 
 import numpy as np 
 from scipy.linalg import eigvals
+from sympy import symbols, Eq, solve
 import hypothesis
 from hypothesis import strategies as st
 from hypothesis import given, settings
@@ -200,6 +201,40 @@ def test_Equilibria_length(alpha, beta, delta, gamma):
     assert len(eq_points) == 2
     assert len(eq_points[0]) == 2
     assert len(eq_points[1]) == 2
+
+
+def test_EquilibriumPoints():
+
+   """
+   Procedure:
+    1. Initialize Lotka-Volterra parameters as symbols
+    2. Define mathematically the Lotka-Volterra equations
+    3. Solve the equations for x and y to find equilibrium points
+    4. Give a set of values to Lotka-Volterra parameters
+    5. Call the Equilibria function to compute equilibrium points for those values
+
+    ---------
+    Verification: 
+    6. The extinction equilibrium points has to have two coordinates
+    
+   """
+   # Define the Lotka-Volterra parameters
+   alpha, beta, delta, gamma = symbols('alpha beta delta gamma')
+   x, y = symbols('x y')
+
+   # Define the Lotka-Volterra equations
+   equations = [Eq(alpha * x - beta * x * y, 0), Eq(delta * x * y - gamma * y, 0)]
+
+   # Solve the equations for x and y
+   equilibrium_points_formula = solve(equations, (x, y))
+
+   # Test the critical points against the Equilibria function
+   parameters = [1.0, 2.0, 3.0, 4.0]
+   eq_point1, eq_point2 = LVM.Equilibria(parameters)
+
+   # Check if both sets of critical points are close
+   assert [point[0].evalf() for point in equilibrium_points_formula] == eq_point1
+   assert [point[1].evalf() for point in equilibrium_points_formula] == eq_point2
 
 
 def LotkaVolterraJacobian(x, *parameters):
