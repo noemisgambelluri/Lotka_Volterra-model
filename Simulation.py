@@ -63,9 +63,6 @@ eq_points_path = paths.get('eq_points_path', './data/eq_points.npy')
 txt_file_path = config['txt_file_path']
 resultsfile_path = txt_file_path.get('results_path', './data/results.npy')
 
-
-
-
 # Save single parameters to variable
 parameters = (alpha, beta, delta, gamma)
 
