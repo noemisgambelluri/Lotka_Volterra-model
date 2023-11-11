@@ -73,22 +73,22 @@ ax.set_xlim([0, time[-1]])
 
 # Add 4 sliders for tweaking the parameters
 # Define an axes area and draw a slider in it
-alpha_slider_ax  = fig.add_axes([0.1, 0.25, 0.65, 0.015], facecolor=axis_color)
+alpha_slider_ax  = fig.add_axes([0.1, 0.25, 0.60, 0.015], facecolor=axis_color)
 alpha_slider = Slider(alpha_slider_ax, 'alpha', 0.1, 2.0, valinit=alpha)
 
 beta_slider_ax = fig.add_axes([0.1, 0.2, 0.60, 0.015], facecolor=axis_color)
 beta_slider = Slider(beta_slider_ax, 'beta', 0.1, 2.0, valinit=beta)
 
-delta_slider_ax = fig.add_axes([0.1, 0.15, 0.50, 0.015], facecolor=axis_color)
+delta_slider_ax = fig.add_axes([0.1, 0.15, 0.60, 0.015], facecolor=axis_color)
 delta_slider = Slider(delta_slider_ax, 'delta', 0.1, 2.0, valinit=delta)
 
-gamma_slider_ax = fig.add_axes([0.1, 0.1, 0.45, 0.015], facecolor=axis_color)
+gamma_slider_ax = fig.add_axes([0.1, 0.1, 0.60, 0.015], facecolor=axis_color)
 gamma_slider = Slider(gamma_slider_ax, 'gamma', 0.1, 2.0, valinit=gamma)
 
-x0_slider_ax  = fig.add_axes([0.1, 0.05, 0.40, 0.015], facecolor=axis_color)
+x0_slider_ax  = fig.add_axes([0.1, 0.05, 0.60, 0.015], facecolor=axis_color)
 x0_slider = Slider(x0_slider_ax, 'Prey', 1, 100, valinit=x0, valstep=1)
 
-y0_slider_ax = fig.add_axes([0.1, 0.0, 0.3, 0.015], facecolor=axis_color)
+y0_slider_ax = fig.add_axes([0.1, 0.0, 0.60, 0.015], facecolor=axis_color)
 y0_slider = Slider(y0_slider_ax, 'Pred', 1, 100, valinit=y0, valstep=1)
 
 # Define an action for modifying the line when any slider's value changes
