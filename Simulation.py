@@ -12,28 +12,59 @@ import sys
 import LotkaVolterraModel as LVM
 import matplotlib.pyplot as plt
 import numpy as np
+import argparse
 
 
-# Read configuration file
-config=configparser.ConfigParser()
-config.read(sys.argv[1])
+# Instantiate the parser
+parser = argparse.ArgumentParser(description='Lotka-Volterra parameters usage')
 
-# Import model parameters     
-alpha = float(config['parameters']['alpha'])                
-beta = float(config['parameters']['beta'])
-delta = float(config['parameters']['delta'])
-gamma = float(config['parameters']['gamma'])
-x0 = float(config['parameters']['x0'])
-y0 = float(config['parameters']['y0'])
-t_max = float(config['parameters']['t_max'])
-num_points = int(config['parameters']['num_points'])
+# Optional argument for settings_file. If the user does not specify
+# it, a default file will be used
+parser.add_argument('settings_file', default='default_settings.ini', nargs='?', help='File for configuration parameters')
+
+# Optional arguments
+parser.add_argument('--alpha', type=float, help='A float value for Alpha parameter (prey per capita growth rate)') 
+parser.add_argument('--beta', type=float, help='A float value for beta parameter (effect of presence of predators on the prey growth rate))')
+parser.add_argument('--delta', type=float, help='A float value for delta parameter (effect of the presence of prey on the predator growth rate)')
+parser.add_argument('--gamma', type=float, help='A float value for gamma parameter (predators per capita death rate)')
+parser.add_argument('--x0', type=float, help='A float value for x0 (initial population of preys)')
+parser.add_argument('--y0', type=float, help='A float value for y0 (initial population of predators)')
+parser.add_argument('--t_max', type=float, help='A float value for max simulation time')
+parser.add_argument('--num_points', type=int, help='A int value for number of time points for Simulation')
+
+# Parse user-prompted parameters
+args = parser.parse_args()
+
+# Read default (or given) configuration file.
+config = configparser.ConfigParser()
+config.read(args.settings_file)
+
+# Get user-prompted parameters if present (different from None) 
+# Otherwise use parameters from configuration file if present
+# Otherwise use default parameters
+params = config['parameters']
+alpha = args.alpha if args.alpha else params.getfloat('alpha', 1.1)
+beta = args.beta if args.beta else params.getfloat('beta', 0.4)
+delta = args.delta if args.delta else params.getfloat('delta', 0.1)
+gamma = args.gamma if args.gamma else params.getfloat('gamma', 0.4)
+x0 = args.x0 if args.x0 else params.getfloat('x0', 5.0) 
+y0 = args.y0 if args.y0 else params.getfloat('y0', 15.0)
+t_max = args.t_max if args.t_max else params.getfloat('t_max', 100.0)
+num_points = args.num_points if args.num_points else params.getint('num_points', 1000)
 
 # Import path parameters
-prey_rates_path = config['paths']['prey_rates_path']
-pred_rates_path = config['paths']['pred_rates_path']
-time_path = config['paths']['time_path']
-eq_points_path = config['paths']['eq_points_path']
-resultsfile_path = config['txt_file_path']['results_path']
+paths = config['paths']
+prey_rates_path = paths.get('prey_rates_path', './data/prey_rates.npy')
+pred_rates_path = paths.get('pred_rates_path', './data/pred_rates.npy')
+time_path = paths.get('time_path', './data/time.npy')
+eq_points_path = paths.get('eq_points_path', './data/eq_points.npy')
+
+# Import path result parameters
+txt_file_path = config['txt_file_path']
+resultsfile_path = txt_file_path.get('results_path', './data/results.npy')
+
+
+
 
 # Save single parameters to variable
 parameters = (alpha, beta, delta, gamma)
