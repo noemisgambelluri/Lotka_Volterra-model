@@ -155,4 +155,3 @@ def AmplitudeandFrequency(sol, t):
     prey_amplitude = np.max(prey_pop) - np.min(prey_pop)
 
     return prey_amplitude, prey_freq, predator_amplitude, predator_freq
-
