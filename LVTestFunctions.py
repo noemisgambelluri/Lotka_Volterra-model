@@ -9,6 +9,7 @@
 
 import numpy as np 
 from scipy.linalg import eigvals
+from scipy.signal import find_peaks
 from sympy import symbols, Eq, solve
 import hypothesis
 from hypothesis import strategies as st
@@ -296,3 +297,71 @@ def test_Equilibria():
    check_stability(eq_point1, parameters_nonzero)
    check_stability(eq_point2, parameters_nonzero)
 
+
+def test_AmplitudeFrequency():
+
+   """
+   Procedure:
+   1. Define a mock time interval  
+   2. Define prey and predators population oscillation patterns as sinusoidals
+   3. Call the Amplitude and Frequency function to compute amplitude and frequencies
+
+   ---------
+   Verification:
+   4. If the computation performed by the function is correct, prey and predators amplitude and
+   frequencies must match expected values
+   """
+
+   # Mock data for testing
+   t = np.linspace(0, 10, 100)
+   prey_population = np.sin(2 * np.pi * 0.5 * t)  # Example sinusoidal prey population
+   predator_population = np.cos(2 * np.pi * 0.5 * t)  # Example sinusoidal predator population
+   sol = np.column_stack((prey_population, predator_population))
+
+   # Call the function to calculate amplitude and frequency
+   prey_amplitude, prey_freq, predator_amplitude, predator_freq = LVM.AmplitudeandFrequency(sol, t)
+
+   # Perform assertions to check if the results match expectations
+   assert prey_amplitude == 1.0
+   assert prey_freq == 0.5
+    
+   assert predator_amplitude == 1.0
+   assert predator_freq == 0.5
+
+@given(t_max = st.floats(1,50), num_points=st.integers(10,500))
+def test_AmplFreqValues(solution, time):
+
+   """
+   Procedure:
+   1. Configurate time interval for Lotka Volterra model given a maximum time  
+   (t_max) and number of time points (num_points)
+   2. define Lotka-Volterra parameters
+   3. Solve Lotka Volterra equations for each time point
+   4. Compute amplitude and frequency for each population's oscillation pattern
+
+   ---------
+   Verification:
+   5. The prey population oscillation pattern's frequency and amplitude must be smaller or equal to 1
+   6. The predator population oscillation pattern's frequency and amplitude must be smaller or equal to 1
+   """
+
+   np.random.seed(5)
+
+   alpha = 1.0
+   beta = 1.0
+   delta = 2.0
+   gamma = 2.0
+   initial_conditions = [1.0, 1.0]
+   parameters = (alpha, beta, delta, gamma)
+   
+   # Solve the equations with the above parameters
+   solution, time = LVM.SolveLotkaVolterra(parameters, initial_conditions, t_max, num_points)
+
+   # Call the function to calculate amplitude and frequency
+   prey_amplitude, prey_freq, predator_amplitude, predator_freq = LVM.AmplitudeandFrequency(solution, time)
+
+   #check if frequencies and amplitude are smaller or equal to 1 as they should be
+   assert prey_freq <= 1.0
+   assert prey_amplitude <= 1.0
+   assert predator_freq <= 1.0
+   assert predator_amplitude <= 1.0
