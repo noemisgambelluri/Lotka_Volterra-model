@@ -40,11 +40,10 @@ solution, time = LVM.SolveLotkaVolterra(parameters, initial_conditions, t_max, n
 prey_rates = solution[:, 0]
 pred_rates = solution[:, 1]
 
-def LotkaVolterra(alpha, delta, x0, y0):
+def LotkaVolterra(alpha, beta, delta, gamma, x0, y0):
     """
         Lotka-Volterra wrapper function used to interactive plot data 
     """
-    global beta, gamma
     parameters = (alpha, beta, delta, gamma)
     initial_conditions = [x0, y0]
     solution, time = LVM.SolveLotkaVolterra(parameters, initial_conditions, t_max, num_points)
@@ -62,8 +61,9 @@ fig = plt.figure()
 ax = fig.add_subplot(111)
 ax.set_title("Interactive Lotka-Volterra")
 
+
 # Adjust the subplots region to leave some space for the sliders and buttons
-fig.subplots_adjust(left=0.25, bottom=0.3)
+fig.subplots_adjust(left=0.15, bottom=0.4, right = 0.85, top = 0.95, wspace = 0.2, hspace= 0.2)
 
 # Draw the initial plot
 # The 'line' variable is used for modifying the line later
@@ -73,39 +73,47 @@ ax.set_xlim([0, time[-1]])
 
 # Add 4 sliders for tweaking the parameters
 # Define an axes area and draw a slider in it
-alpha_slider_ax  = fig.add_axes([0.25, 0.2, 0.65, 0.03], facecolor=axis_color)
-alpha_slider = Slider(alpha_slider_ax, 'Preys Growth-rate', 0.1, 2.0, valinit=alpha)
+alpha_slider_ax  = fig.add_axes([0.1, 0.25, 0.65, 0.015], facecolor=axis_color)
+alpha_slider = Slider(alpha_slider_ax, 'alpha', 0.1, 2.0, valinit=alpha)
 
-delta_slider_ax = fig.add_axes([0.25, 0.15, 0.65, 0.03], facecolor=axis_color)
-delta_slider = Slider(delta_slider_ax, 'Predators growth-rate', 0.1, 2.0, valinit=delta)
+beta_slider_ax = fig.add_axes([0.1, 0.2, 0.60, 0.015], facecolor=axis_color)
+beta_slider = Slider(beta_slider_ax, 'beta', 0.1, 2.0, valinit=beta)
 
-x0_slider_ax  = fig.add_axes([0.25, 0.1, 0.65, 0.03], facecolor=axis_color)
-x0_slider = Slider(x0_slider_ax, 'Prey population', 1, 100, valinit=x0, valstep=1)
+delta_slider_ax = fig.add_axes([0.1, 0.15, 0.50, 0.015], facecolor=axis_color)
+delta_slider = Slider(delta_slider_ax, 'delta', 0.1, 2.0, valinit=delta)
 
-y0_slider_ax = fig.add_axes([0.25, 0.05, 0.65, 0.03], facecolor=axis_color)
-y0_slider = Slider(y0_slider_ax, 'Predator population', 1, 100, valinit=y0, valstep=1)
+gamma_slider_ax = fig.add_axes([0.1, 0.1, 0.45, 0.015], facecolor=axis_color)
+gamma_slider = Slider(gamma_slider_ax, 'gamma', 0.1, 2.0, valinit=gamma)
+
+x0_slider_ax  = fig.add_axes([0.1, 0.05, 0.40, 0.015], facecolor=axis_color)
+x0_slider = Slider(x0_slider_ax, 'Prey', 1, 100, valinit=x0, valstep=1)
+
+y0_slider_ax = fig.add_axes([0.1, 0.0, 0.3, 0.015], facecolor=axis_color)
+y0_slider = Slider(y0_slider_ax, 'Pred', 1, 100, valinit=y0, valstep=1)
 
 # Define an action for modifying the line when any slider's value changes
 def sliders_on_change(val):
-    prey_rates, pred_rates = LotkaVolterra(alpha_slider.val, delta_slider.val, x0_slider.val, y0_slider.val)
+    prey_rates, pred_rates = LotkaVolterra(alpha_slider.val, beta_slider.val, delta_slider.val, gamma_slider.val, x0_slider.val, y0_slider.val)
     prey_line.set_ydata(prey_rates)
     pred_line.set_ydata(pred_rates)
     fig.canvas.draw_idle()
 
 alpha_slider.on_changed(sliders_on_change)
+beta_slider.on_changed(sliders_on_change)
 delta_slider.on_changed(sliders_on_change)
+gamma_slider.on_changed(sliders_on_change)
 x0_slider.on_changed(sliders_on_change)
 y0_slider.on_changed(sliders_on_change)
 
 # Add a set of radio buttons for changing population view
-pop_radios_ax = fig.add_axes([0.025, 0.5, 0.15, 0.15], facecolor=axis_color)
-pop_radios = RadioButtons(pop_radios_ax, ('Prey', 'Predator', 'Both'), active=2)
+pop_radios_ax = fig.add_axes([0.85, 0.1, 0.1, 0.15], facecolor=axis_color)
+pop_radios = RadioButtons(pop_radios_ax, ('Prey', 'Pred', 'Both'), active=2)
 
 def pop_radios_on_clicked(label):
     if label == 'Prey':
         prey_line.set_alpha(1)
         pred_line.set_alpha(0)
-    elif label == 'Predator':
+    elif label == 'Pred':
         prey_line.set_alpha(0)
         pred_line.set_alpha(1)
     else:
