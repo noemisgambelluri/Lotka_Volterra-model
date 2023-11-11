@@ -9,10 +9,21 @@ To clone the repository and initiate the simulation, the user should utilize the
     gitclone https://github.com/noemisgambelluri/Lotka_Volterra-model.git
     cd Lotka_Volterra-model
 
-    python Simulation.py settings.ini
-    python InteractivePlot.py setting.ini
-    python Animation_1.py settings.ini
-    python Animation_2.py settings.ini
+    python Simulation.py default_settings.ini
+    python InteractivePlot.py default_setting.ini
+    python Animation_1.py default_settings.ini
+    python Animation_2.py default_settings.ini
+
+The user is provided with a default settings file that can be replaced by a new user-generated settings file. In order to run this simulation, the user needs to have the following packages installed: 
+* numpy
+* scipy
+* sys
+* confiparser
+* argparse
+* matplotlib.pyplot, matplotlib.animation, matplotlib.widgets
+* sympy
+* hypothesis
+
 
 ## Introduction to the model
 
@@ -51,7 +62,7 @@ In this frame, the Lotka-Volterra model is based on the following assumptions re
 
 The steps of this simulation are structured to be followed in order to allow the user to better understand the functioning of the Lotka-Volterra model. 
 
-1. The user has to set the model parameters in the [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/settings.ini) file. In particular, the user has to choose the Lotka-Volterra parameters, hence: 
+1. The user has to set the model parameters in a settings file. In particular, the user has to choose the Lotka-Volterra parameters, hence: 
     * $\alpha$ : prey per capita growth rate
     * $\beta$ : the effect of the presence of predators on the prey growth rate
     * $\gamma$ : predators per capita death rate
@@ -60,10 +71,29 @@ The steps of this simulation are structured to be followed in order to allow the
     * $y_{0}$ : the initial population of predators
 
 It is suggested to keep parameters below 2.0, hower there are no specific constraints. 
+The user can choose to provide his own settings file by launching:
 
-2. The user has to launch the [Simulation](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Simulation.py) file through which parameters from the [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/settings.ini) file are imported exploiting the ConfigParser library, simulate the Lotka-Volterra model equations with the chosen initial conditions and visualize them in two different plots. The first plot is a dynamic representation of Lotka-Volterra equations, showing the rates of change of each population as a function of time. The second plot is a representation of the Predators Population as a function of the Prey Population, to highlight their intertwined interaction. At the end of the simulation, the Lotka-Volterra equilibrium points (i.e., the Coexistence equilibrium point and the Extinction equilibrium point), amplitude and frequency of each population's oscillation pattern and the rates of change of each population for each time point are saved in a txt file in order to be easily consultable. 
+    python Simulation.py settings_user.ini
 
-3. The user has to launch the [InteractivePlot](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/InteractivePlot.py) file, which allow to interactively play with initial conditions (i.e., preys and predators initial populations) and parameters (i.e., preys and predators growth rate). In this way, the user can experiment and have a better understanding of model as well as helping perform sensitivity analysis. The user can assess how changes in parameters affect the stability and the behaviour of the system. The interactive plot can also be useful in terms of model validation by showing how well the model aligns with observed population data.
+If the user has not specified a value for some parameter, a default value will be used by the simulation. 
+The user can also modify parameters value from command line:
+
+    python Simulation.py setting_user.ini --alpha <value_of_alpha>
+
+In this way, the user can overwrite in its own settings file the value of each parameter to be changed directly from the terminal. If the user does not specify a settings file:
+
+    python Simulation.py
+
+a default settings file will be imported for the simulation. The user can also decide to chaneg one or more parameters of the default settings file directly by terminal, writing (e.g., user wants to change alpha value):
+
+    python Simulation.py --alpha <chosen_alpha_value>
+
+
+
+
+2. The user has to launch the [Simulation](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Simulation.py) file through which parameters from the [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/default_settings.ini) file are imported exploiting the ConfigParser library, simulate the Lotka-Volterra model equations with the chosen initial conditions and visualize them in two different plots. The first plot is a dynamic representation of Lotka-Volterra equations, showing the rates of change of each population as a function of time. The second plot is a representation of the Predators Population as a function of the Prey Population, to highlight their intertwined interaction. At the end of the simulation, the Lotka-Volterra equilibrium points (i.e., the Coexistence equilibrium point and the Extinction equilibrium point), amplitude and frequency of each population's oscillation pattern and the rates of change of each population for each time point are saved in a txt file in order to be easily consultable. 
+
+3. The user has to launch the [InteractivePlot](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/InteractivePlot.py) file, which allow to interactively play with initial conditions (i.e., preys and predators initial populations) and parameters (i.e., preys and predators growth rate, effect of predators on prey growth rate, effect of prey on predators death rate). In this way, the user can experiment and have a better understanding of model as well as helping perform sensitivity analysis. The user can assess how changes in parameters affect the stability and the behaviour of the system. The interactive plot can also be useful in terms of model validation by showing how well the model aligns with observed population data.
 
 4. The user has to launch the [Animation_1](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Animation_1.py) file, that creates a real time figure of the rates of change of the Preys-Predators Populations as time evolves and the [Animation_2](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/Animation_2.py) file, that creates a real time figure of the motion of the initial conditions around the closed trajectory.
 
@@ -71,7 +101,7 @@ It is suggested to keep parameters below 2.0, hower there are no specific constr
 
 This project contains 7 files:
 
-1. [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/settings.ini) is a .ini file that contains the model parameter set by the user and the local paths used to save and load the data to be visualized.
+1. [settings](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/default_settings.ini) is a .ini file that contains the model parameter set by the user and the local paths used to save and load the data to be visualized.
 
 2. [LotkaVolterraModel](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/LotkaVolterraModel.py) is a .py file in which are defined all the functions needed for the model simulation.
 
