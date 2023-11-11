@@ -106,7 +106,10 @@ def Equilibria(parameters):
 def AmplitudeandFrequency(sol, t):
 
     """
-    This function calculates the amplitude and frequency of the oscillations patterns of 
+    This main function:
+    1. Extracts predator and prey populations from the solution array 
+    2. Calls the inner function Ampl_Freq_population for both predator and prey populations 
+    3. Returns the calculated amplitude and frequency of the oscillations patterns of 
     the Predator and Prey's populations to understand the cyclic nature of the 
     predator-prey interaction.
 
@@ -133,25 +136,27 @@ def AmplitudeandFrequency(sol, t):
 
     """
 
+    def Ampl_Freq_population(time, population):
+
+        """
+        This inner function computes amplitude and frequency for each population to be called.
+        """
+
+        # Identify the peaks in the populations data
+        peaks, _ = find_peaks(population)
+        # Compute time intervals between them
+        t_intervals = np.diff(t[peaks])
+        # Compute frequency on the mean of all time points corresponding to the peak
+        freq = 1 / np.mean(t_intervals)
+        # Compute amplitude
+        amplitude = np.max(population) - np.min(population)
+
+        return amplitude, freq
+    
     predator_pop = sol[:, 1]
     prey_pop = sol[:, 0]
 
-    # Identify the peaks in the predators populations data
-    predator_peaks, _ = find_peaks(predator_pop)
-    # Compute time intervals betweem them
-    # Subarray of time points corresponding to the peaks of the predator population
-    predator_t_intervals = np.diff(t[predator_peaks])
-    # Compute frequency on the mean of all time points corresponding to the peak
-    predator_freq = 1 / np.mean(predator_t_intervals)
-    # Compute amplitude
-    predator_amplitude = np.max(predator_pop) - np.min(predator_pop)
-
-    # Identify the peaks in the preys populations data
-    prey_peaks, _ = find_peaks(prey_pop)
-    # Compute time intervals between them
-    prey_t_intervals = np.diff(t[prey_peaks])
-    # Compute frequency on the mean of all time points corresponding to the peak
-    prey_freq = 1 / np.mean(prey_t_intervals)
-    prey_amplitude = np.max(prey_pop) - np.min(prey_pop)
-
+    predator_amplitude, predator_freq = Ampl_Freq_population(t, predator_pop)
+    prey_amplitude, prey_freq = Ampl_Freq_population(t, prey_pop)
+    
     return prey_amplitude, prey_freq, predator_amplitude, predator_freq
