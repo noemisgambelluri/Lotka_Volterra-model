@@ -9,11 +9,15 @@
 
 import configparser
 import sys
-from sys import argv
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation, PillowWriter
 
+if len(sys.argv) < 2:
+    settings_file = 'default_settings.ini'
+else:
+    settings_file = sys.argv[1]
+    
 # Read configuration file
 config=configparser.ConfigParser()
 config.read(sys.argv[1])
