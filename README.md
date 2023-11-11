@@ -128,4 +128,4 @@ Command line syntax:
     python Animation_2.py settings.ini
 
 ![Animation_1](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/images/Prey_pred_animation.gif) 
-![Animation_1](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/images/Prey_pred_phasespace_animation.gif) 
+![Animation_2](https://github.com/noemisgambelluri/Lotka_Volterra-model/raw/main/images/Prey_pred_phasespace_animation.gif) 
