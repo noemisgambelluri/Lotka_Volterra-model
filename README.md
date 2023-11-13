@@ -70,7 +70,7 @@ The steps of this simulation are structured to be followed in order to allow the
     * $x_{0}$ : the initial population of preys
     * $y_{0}$ : the initial population of predators
     * $t_max$ : time span of the simualation
-    * $num_points$ : number of time points for which the simulation is ran
+    * $num_{points}$ : number of time points for which the simulation is ran
 
 It is suggested to keep parameters below 2.0, hower there are no specific constraints. 
 The user can choose to provide his own settings file by launching:
