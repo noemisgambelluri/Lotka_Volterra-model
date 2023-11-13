@@ -88,7 +88,7 @@ In this way, the user can overwrite in its own settings file the value of each p
 
 a default settings file will be imported for the simulation. The user can also decide to chaneg one or more parameters of the default settings file directly by terminal, writing (e.g., user wants to change alpha value):
 
-    python Simulation.py --alpha <chosen_alpha_value>
+    python Simulation.py --alpha <value_of_alpha>
 
 
 
